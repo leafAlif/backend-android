@@ -51,6 +51,41 @@ const deleteItemById = async (req, res) => {
   }
 };
 
+// KRS
+const getKrs = async (req, res) => {
+  try {
+    const krs = await models.getKrs();
+    res.json(krs);
+  } catch (err) {
+    handleQueryError(res, err);
+  }
+};
+
+const getKrsById = async (req, res) => {
+  try {
+    const krs = await models.getKrsById(req.params.id);
+    res.json(krs);
+  } catch (err) {
+    handleQueryError(res, err);
+  }
+};
+
+const createKrs = async (req, res) => {
+  try {
+    const newKrs = await models.createKrs(req.body);
+    res.status(201).json({ message: 'KRS berhasil dibuat!', newKrs });
+  } catch (err) {
+    handleQueryError(res, err);
+  }
+};
+
 module.exports = {
-  getItems, getItemById, createItem, updateItemById, deleteItemById,
+  getItems,
+  getItemById,
+  createItem,
+  updateItemById,
+  deleteItemById,
+  getKrs,
+  getKrsById,
+  createKrs,
 };
