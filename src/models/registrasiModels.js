@@ -62,6 +62,21 @@ const createKrs = async (data) => {
   return result;
 };
 
+const updateKrsById = async (id, updatedData) => {
+  const columns = Object.keys(updatedData);
+  const values = Object.values(updatedData);
+
+  const result = await pool.query(
+    `UPDATE krs SET ${columns.map((col, index) => `${col}=$${index + 1}`).join(', ')} WHERE id=$${columns.length + 1} RETURNING *`,
+    [...values, id],
+  );
+  return result.rows[0];
+};
+
+const deleteKrsById = async (id) => {
+  await pool.query('DELETE FROM krs WHERE id=$1', [id]);
+};
+
 module.exports = {
   getItems,
   getItemById,
@@ -71,4 +86,6 @@ module.exports = {
   getKrs,
   getKrsById,
   createKrs,
+  updateKrsById,
+  deleteKrsById,
 };

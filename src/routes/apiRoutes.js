@@ -12,5 +12,7 @@ router.delete('/delete_registrasi_by_id/:id', registrasiController.deleteItemByI
 router.get('/get_krs', registrasiController.getKrs);
 router.get('/get_krs_by_id/:id', registrasiController.getKrsById);
 router.post('/insert_krs', registrasiController.createKrs);
+router.put('/update_krs_by_id/:id', registrasiController.updateKrsById);
+router.delete('/delete_krs_by_id/:id', registrasiController.deleteKrsById);
 
 module.exports = router;

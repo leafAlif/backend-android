@@ -79,6 +79,24 @@ const createKrs = async (req, res) => {
   }
 };
 
+const updateKrsById = async (req, res) => {
+  try {
+    const updatedKrs = await models.updateKrsById(req.params.id, req.body);
+    res.json({ message: 'KRS sukses diperbarui!', updatedKrs });
+  } catch (err) {
+    handleQueryError(res, err);
+  }
+};
+
+const deleteKrsById = async (req, res) => {
+  try {
+    await models.deleteKrsById(req.params.id);
+    res.json({ message: 'KRS sukses dihapus!' });
+  } catch (err) {
+    handleQueryError(res, err);
+  }
+};
+
 module.exports = {
   getItems,
   getItemById,
@@ -88,4 +106,6 @@ module.exports = {
   getKrs,
   getKrsById,
   createKrs,
+  updateKrsById,
+  deleteKrsById,
 };
